@@ -1,0 +1,4 @@
+Date:
+  type: custom-scalar
+  config:
+    scalarType: '@=newObject("MLL\\GraphQLScalars\\Date")'

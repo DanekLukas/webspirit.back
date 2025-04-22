@@ -1,0 +1,50 @@
+MutationCommon:
+  type: object
+  config:
+    fields:
+      InsertComment:
+        args:
+          id:
+            type: "String!"
+            description: "Text id"
+          text:
+            type: "String!"
+            description: "comment text"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertComment', [args])"
+        type: "Comment"
+        description: "Inserted Comment"
+      ChangePassword:
+        args:
+          password:
+            type: "String!"
+            description: "New password"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('changePassword', [args])"
+        type: "User"
+        description: "Change password"
+      ActivateAccount:
+        args:
+          first_name:
+            type: "String!"
+            description: "first name"
+          last_name:
+            type: "String!"
+            description: "last_name"
+          age:
+            type: "Int!"
+            description: "New password"
+          password:
+            type: "String!"
+            description: "New password"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insert comment', [args])"
+        type: "User"
+        description: "Activate account"
+

@@ -1,0 +1,44 @@
+User:
+  type: object
+  config:
+    description: "User" 
+    fields:
+      id:
+        type: String!
+        description: "The ID of the User"
+      create_date:
+        type: DateTime
+        description: "Create date"
+      last_update:
+        type: DateTime
+        description: "last update date"
+      delete_date:
+        type: DateTime
+        description: "Delete date"
+      name:
+        type: String
+        description: "name"
+      first_name:
+        type: String
+        description: "first_name"
+      last_name:
+        type: String
+        description: "last_name"
+      birth:
+        type: Date
+        description: "Date of birth"
+      active:
+        type: Boolean
+        description: "active account"
+      role:
+        type: String
+        description: "role"
+      created_by:
+        type: User
+        description: "created by"
+      updated_by:
+        type: User
+        description: "updated by"
+      deleted_by:
+        type: User
+        description: "deleted by"

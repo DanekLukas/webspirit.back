@@ -1,0 +1,27 @@
+QueryCommon:
+  type: object
+  config:
+    fields:
+      Categories:
+        type: "[Category]"
+        resolve: "@=service('getCategories')"
+      Texts:
+        type: "[Text]"
+        args:
+          id:
+            description: 'id'
+            type: 'String'
+        resolve: "@=service('getTexts')"
+      Own:
+        type: "User"
+        resolve: "@service('getOwn')"
+      FilteredCategories:
+        type: "[Category]"
+        resolve: "@=service('getFilteredCategories')"
+      FilteredTexts:
+        type: "[Text]"
+        args:
+          category:
+            description: 'category name'
+            type: 'String'
+        resolve: "@=service('getFilteredTexts')"

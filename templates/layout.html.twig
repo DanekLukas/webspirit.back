@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Karel Daněk duchovní texty obrázky" />
+    <meta name="description" content="Karel Daněk moudré a duchovní texty a obrázky" />
+    <meta name="classification" content="Karel Daněk moudré a duchovní texty a obrázky" />
+    <meta name="revisit-after" content="1 day" />
+    <meta property="og:url" content="https://webspirit.danek-family.cz/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Webspirit - Karel Daněk" />
+    <meta property="og:description" content="Karel Daněk moudré a duchovní texty a obrázky  " />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:image" content="https://webspirit.danek-family.cz/kniha.png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="157" />
+    <link rel="shortcut icon" href="/img/foto.jpg" />
+    <title>Karel Daněk</title>
+    <meta name="token" content="{{ query }}" />
+    <style>
+      @import url('/assets/index-Be5RTHyj.css');
+      @import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap');
+  
+      body {
+        padding: 0 1rem;
+        font-size: 14pt;
+        font-family: 'Cardo', serif;
+        overflow-y: scroll;
+        background-color: #e9e6df;
+      }
+    </style>
+  </head>
+  <body class="hearth">
+    <div class="container">
+      <h1 class="name">Karel&nbsp;Daněk</h1>
+      <img src="/img/foto.jpg" alt="Karel Daněk" class="foto" />
+      {# <div class="top"><img src="/img/kniha960.png" class="book" alt="srdce" /></div> #}
+      <div></div>
+      <div id="root">
+        <div class="sub">
+          <div id="menu">
+            {% for categories in categoriesFiltered %}
+              <a href="/{{ categories[1] }}">{{ categories[1] }}</a>
+            {% endfor %}
+          </div>
+          {% for content in contents %}
+            <div class="item">
+              <div class="text">
+                <h2 id="{{ content.id }}">{{ content.title }}</h2>
+                {% apply markdown_to_html %} {{ content.text }} {% endapply %}
+                {% if content.author %}
+                  <b>Autor:</b> {{ content.author }}
+                {% endif %}
+                {% if content.source %}
+                  <br /><b>Zdroj:</b> {{ content.source }}
+                {% endif %}
+                <br /><b>Vložil:</b> {{ content.createdBy }} {{ content.created }}
+                {% if content.updated %}
+                  <br />Naposled upravil: {{ content.updatedBy }} {{ content.updated }}
+                {% endif %}
+              </div>
+              <hr />
+              <div class="comments">
+                {% for comment in content.comments %}
+                  <div class="comment">
+                    <p>
+                      {{ comment.comment }} <br />napsal {{ comment.by }} {{ comment.at }}
+                    </p>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>   
+  <script type="module" crosso rigin src="/assets/index-BXYT30Yt.js "></script>
+</html>

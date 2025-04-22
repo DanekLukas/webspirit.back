@@ -1,0 +1,54 @@
+overblog_graphql_endpoint:
+    resource: '@OverblogGraphQLBundle/Resources/config/routing/multiple.yaml'
+    prefix: graphql
+    methods: POST
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+RegisterController:
+    path: /do/register
+    controller: App\Controller\RegisterController::main
+    methods: POST
+
+ForgottenController:
+    path: /do/forgotten        
+    controller: App\Controller\ForgottenController::main
+    methods: POST
+
+ArchiveController:
+    path: /archiv
+    controller: App\Controller\HomepageController::archive
+    condition:  "context.getMethod() in ['GET']"
+    methods: GET
+
+CategoriesController:
+    path: /archiv/{category}
+    controller: App\Controller\HomepageController::category
+    condition:  "context.getMethod() in ['GET']"
+    methods: GET
+
+IdController:
+    path: /{id}
+    controller: App\Controller\HomepageController::id
+    condition:  "context.getMethod() in ['GET']"
+    methods: GET
+
+HomepageController:
+    path: /
+    controller: App\Controller\HomepageController::main
+    condition:  "context.getMethod() in ['GET']"
+    methods: GET
+
+api_login_check:
+    path: /login_check
+
+api_refresh_token:
+    path: /token_refresh
+
+# app_graphql:
+#     path: /graphql
+#     controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction

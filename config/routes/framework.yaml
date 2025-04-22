@@ -1,0 +1,8 @@
+homepage:
+    path: /
+    controller: App\Controller\HomepageController::main
+
+when@dev:
+    _errors:
+        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+        prefix: /_error

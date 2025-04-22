@@ -1,0 +1,177 @@
+MutationAdmin:
+  type: object
+  config:
+    fields:
+      InsertUser:
+        args:
+          name:
+            type: "String!"
+            description: "user name"
+          password:
+            type: "String!"
+            description: "password"
+          role:
+            type: "String"
+            description: "role"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertUser', [args])"
+        type: "User"
+        description: "Inserted User"
+      UpdateUser:
+        args:
+          id:
+            type: "String!"
+            description: "User id"
+          name:
+            type: "String!"
+            description: "user name"
+          first_name:
+            type: "String!"
+            description: "first name"
+          last_name:
+            type: "String!"
+            description: "first name"
+          age:
+            type: "Int!"
+            description: "first name"
+          password:
+            type: "String!"
+            description: "password"
+          role:
+            type: "String"
+            description: "role"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('updateUser', [args])"
+        type: "User"
+        description: "Inserted User"
+      InsertCategory:
+        args:
+          name:
+            type: "String"
+            description: "user name"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertCategory', [args])"
+        type: "Category"
+        description: "Inserted Category"
+      UpdateCategory:
+        args:
+          id:
+            type: "String!"
+            description: "Category id"
+          name:
+            type: "String"
+            description: "user name"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertCategory', [args])"
+        type: "Category"
+        description: "Inserted Category"
+      InsertText:
+        args:
+          title:
+            type: "String!"
+            description: "text title"
+          text:
+            type: "String!"
+            description: "text"
+          author:
+            type: "String"
+            description: "author"
+          source:
+            type: "String"
+            description: "source"
+          category:
+            type: "String"
+            description: "category id "
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertUser', [args])"
+        type: "Text"
+        description: "Inserted User"
+      UpdateText:
+        args:
+          id:
+            type: "String!"
+            description: "Text id"
+          title:
+            type: "String!"
+            description: "text title"
+          text:
+            type: "String!"
+            description: "text"
+          author:
+            type: "String"
+            description: "author"
+          source:
+            type: "String"
+            description: "source"
+          category:
+            type: "String"
+            description: "category id "
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertUser', [args])"
+        type: "Text"
+        description: "Inserted User"
+      InsertComment:
+        args:
+          id:
+            type: "String!"
+            description: "Text id"
+          text:
+            type: "String!"
+            description: "comment text"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertComment', [args])"
+        type: "Comment"
+        description: "Inserted Comment"
+      ChangePassword:
+        args:
+          password:
+            type: "String!"
+            description: "New password"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('changePassword', [args])"
+        type: "User"
+        description: "Change password"
+      ActivateAccount:
+        args:
+          first_name:
+            type: "String!"
+            description: "first name"
+          last_name:
+            type: "String!"
+            description: "last_name"
+          age:
+            type: "Int!"
+            description: "New password"
+          password:
+            type: "String!"
+            description: "New password"
+          timeZone:
+            type: "Int!"
+            description: Time zone in hours
+        resolve: "@=service('insertComment', [args])"
+        type: "User"
+        description: "Activate account"
+      imageUpload:
+        args:
+          file:
+            type: "UploadFile!"
+            description: "file upload"
+        resolve: "@=service('imageUpload', [args])"
+        type: "String"
+        description: "name"

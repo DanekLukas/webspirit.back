@@ -1,0 +1,17 @@
+overblog_graphql:
+    definitions:
+        schema:
+            admin:
+                query: QueryAdmin
+                mutation: MutationAdmin
+            common:
+                query: QueryCommon
+                mutation: MutationCommon
+            default:
+                query: Query
+        mappings:   
+            types:
+                -
+                    type: yaml
+                    dir: "%kernel.project_dir%/config/graphql/types"
+                    suffix: null

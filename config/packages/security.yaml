@@ -1,0 +1,79 @@
+security:
+    role_hierarchy:
+        ROLE_USER:  ROLE_USER
+        ROLE_ADMIN: [ ROLE_USER, ROLE_ADMIN ]
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        user:
+            entity:
+                # the class of the entity that represents users
+                class: 'App\Entity\User'
+                # the property to query by - e.g. email, username, etc
+                property: 'name'
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            stateless: true
+            security: false
+        login:
+            pattern: ^/login
+            stateless: true
+            entry_point: jwt
+            json_login:
+                check_path: /login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+        api_token_refresh:
+            pattern: ^/token_refresh
+            stateless: true
+            refresh_jwt: ~
+        register:
+            pattern: ^/register
+            stateless: true
+        forgotten:
+            pattern: ^/forgotten
+            stateless: true
+        default:
+            pattern: ^/graphql/default
+            stateless: true
+            lazy: true
+            security: false
+        main:
+            pattern: ^/graphql*
+            stateless: true
+            lazy: true
+            security: true
+            jwt: ~
+        framework:
+            pattern: ^/*
+            stateless: true
+            security: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/forgotten, roles: PUBLIC_ACCESS }
+        - { path: ^/login*, roles: PUBLIC_ACCESS }
+        - { path: ^/token_refresh, roles: ROLE_USER }
+        - { path: ^/graphql/admin, roles: ROLE_ADMIN }
+        - { path: ^/graphql/common, roles: ROLE_USER }
+        - { path: ^/graphql/default, roles: PUBLIC_ACCESS }
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon
+        

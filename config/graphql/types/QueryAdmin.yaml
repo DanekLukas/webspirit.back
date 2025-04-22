@@ -1,0 +1,55 @@
+QueryAdmin:
+  type: object
+  config:
+    fields:
+      User:
+        type: "User"
+        args:
+          id:
+            description: 'id'
+            type: 'String'
+        resolve: "@=service('getUser', [args])"
+      Category:
+        type: "Category"
+        args:
+          id:
+            description: 'id'
+            type: 'String'
+        resolve: "@=service('getCategory', [args])"
+      Categories:
+        type: "[Category]"
+        resolve: "@=service('getCategories')"
+      Text:
+        type: "Text"
+        args:
+          id:
+            description: 'id'
+            type: 'String'
+        resolve: "@=service('getText', [args])"
+      Texts:
+        type: "[Text]"
+        args:
+          id:
+            description: 'id'
+            type: 'String'
+        resolve: "@=service('getTexts')"
+      Own:
+        type: "User"
+        resolve: "@service('getOwn')"
+      Images:
+        description: 'images'
+        resolve: "@=service('getImages', [args])"
+        type: '[String]'
+      FilteredCategories:
+        type: "[Category]"
+        resolve: "@=service('getFilteredCategories')"
+      FilteredTexts:
+        type: "[Text]"
+        args:
+          category:
+            description: 'category name'
+            type: 'String'
+        resolve: "@=service('getFilteredTexts')"
+      EditTexts:
+        type: "[Text]"
+        resolve: "@=service('getEditTexts')"

@@ -1,0 +1,29 @@
+Category:
+  type: object
+  config:
+    description: "Category" 
+    fields:
+      id:
+        type: String!
+        description: "The ID of the Category"
+      create_date:
+        type: DateTime
+        description: "Create date"
+      last_update:
+        type: DateTime
+        description: "last update date"
+      delete_date:
+        type: DateTime
+        description: "Delete date"
+      name:
+        type: String
+        description: "name"
+      created_by:
+        type: User
+        description: "created by"
+      updated_by:
+        type: User
+        description: "updated by"
+      deleted_by:
+        type: User
+        description: "deleted by"

@@ -18,6 +18,9 @@ Category:
       name:
         type: String
         description: "name"
+      name_en:
+        type: String
+        description: "name"
       created_by:
         type: User
         description: "created by"

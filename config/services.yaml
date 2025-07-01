@@ -28,3 +28,6 @@ services:
             - { name: overblog_graphql.resolver_map, schema: default }
             - { name: overblog_graphql.resolver_map, schema: common }
             - { name: overblog_graphql.resolver_map, schema: admin }
+
+    App\Twig\Base64Extension:
+        tags: ['twig.extension']

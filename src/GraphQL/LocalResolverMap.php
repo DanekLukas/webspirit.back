@@ -32,16 +32,16 @@ class LocalResolverMap extends ResolverMap
         return [
             'Query' => [        
                 'Categories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getCategories();},
-                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id']);},
+                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id'], $args['lang']);},
                 'FilteredCategories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getFilteredCategories();},
-                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category']);},
+                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category'], $args['lang']);}
             ],
             'QueryCommon' => [        
                 'Categories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getCategories();},
-                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id']);},
+                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id'], $args['lang']);},
                 'Own' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->getOwn();},
                 'FilteredCategories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getFilteredCategories();},
-                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category']);},
+                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category'], $args['lang']);},
             ],
             'MutationCommon' => [
                 'InsertComment' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->commentRepository->insertComment($args['id'], $args['text'], $args['timeZone']);},
@@ -53,25 +53,26 @@ class LocalResolverMap extends ResolverMap
                 'Category' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getCategory($args['id']);},
                 'Categories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getCategories();},
                 'Text' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getText($args['id']);},
-                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id']);},
+                'Texts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getTexts($args['id'], $args['lang']);},
                 'Own' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->getOwn();},
                 'Images' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->imagesRepository::getImages();},
                 'FilteredCategories' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->getFilteredCategories();},
-                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category']);},
+                'FilteredTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getFilteredTexts($args['category'], $args['lang']);},
                 'EditTexts' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->getEditTexts();},
                 
             ],
             'MutationAdmin' => [
                 'InsertUser' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->insertUser($args['name'], $args['password'], $args['role'], $args['timeZone']);},
                 'UpdateUser' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->updateUser($args['id'], $args['name'], $args['password'], $args['role'], $args['timeZone']);},
-                'InsertCategory' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->insertCategory($args['name'], $args['timeZone']);},
-                'UpdateCategory' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->updateCategory($args['id'], $args['name'], $args['timeZone']);},
+                'InsertCategory' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->insertCategory($args['name'], $args['name_en'], $args['timeZone']);},
+                'UpdateCategory' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->categoryRepository->updateCategory($args['id'], $args['name'], $args['name_en'], $args['timeZone']);},
                 'InsertText' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->insertText($args['title'], $args['text'], $args['author'], $args['source'], $args['category'], $args['timeZone']);},
-                'UpdateText' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->updateText($args['id'], $args['title'], $args['text'], $args['author'], $args['source'], $args['category'], $args['timeZone']);},
+                'UpdateText' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->updateText($args['id'], $args['title'], $args['title_en'], $args['text'], $args['text_en'], $args['author'], $args['source'], $args['category'], $args['timeZone']);},
                 'InsertComment' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->commentRepository->insertComment($args['id'], $args['text'], $args['timeZone']);},
                 'ActivateAccount' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->activateAccount($args['first_name'], $args['last_name'], $args['age'], $args['password'], $args['timeZone']);},
                 'ChangePassword' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->userRepository->changePassword($args['password'], $args['timeZone']);},
                 'imageUpload' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->imagesRepository->imageUpload($args['file']);},
+                'Translate' => function ($value, ArgumentInterface $args, ArrayObject $context, ResolveInfo $info) {return $this->textRepository->translate($args['id']);},            
             ]
         ];
     }

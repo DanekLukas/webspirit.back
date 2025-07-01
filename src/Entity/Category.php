@@ -45,6 +45,9 @@ class Category
     #[ORM\OneToMany(targetEntity: Text::class, mappedBy: 'category')]
     private Collection $texts;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name_en = null;
+
     public function __construct()
     {
         $this->texts = new ArrayCollection();
@@ -172,6 +175,18 @@ class Category
                 $text->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNameEn(): ?string
+    {
+        return $this->name_en;
+    }
+
+    public function setNameEn(string $name_en): static
+    {
+        $this->name_en = $name_en;
 
         return $this;
     }

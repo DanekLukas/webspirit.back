@@ -52,7 +52,10 @@ MutationAdmin:
         args:
           name:
             type: "String"
-            description: "user name"
+            description: "category name"
+          name_en:
+            type: "String"
+            description: "category name"
           timeZone:
             type: "Int!"
             description: Time zone in hours
@@ -66,11 +69,14 @@ MutationAdmin:
             description: "Category id"
           name:
             type: "String"
-            description: "user name"
+            description: "category name"
+          name_en:
+            type: "String"
+            description: "category name"
           timeZone:
             type: "Int!"
             description: Time zone in hours
-        resolve: "@=service('insertCategory', [args])"
+        resolve: "@=service('updateCategory', [args])"
         type: "Category"
         description: "Inserted Category"
       InsertText:
@@ -95,7 +101,7 @@ MutationAdmin:
             description: Time zone in hours
         resolve: "@=service('insertUser', [args])"
         type: "Text"
-        description: "Inserted User"
+        description: "Inserted Text"
       UpdateText:
         args:
           id:
@@ -104,7 +110,13 @@ MutationAdmin:
           title:
             type: "String!"
             description: "text title"
+          title_en:
+            type: "String!"
+            description: "text title"
           text:
+            type: "String!"
+            description: "text"
+          text_en:
             type: "String!"
             description: "text"
           author:
@@ -121,7 +133,7 @@ MutationAdmin:
             description: Time zone in hours
         resolve: "@=service('insertUser', [args])"
         type: "Text"
-        description: "Inserted User"
+        description: "Updated Text"
       InsertComment:
         args:
           id:
@@ -175,3 +187,9 @@ MutationAdmin:
         resolve: "@=service('imageUpload', [args])"
         type: "String"
         description: "name"
+      Translate:
+        args:
+          id: 'String'
+        resolve: "@=service('translate')"
+        type: "Text"
+        description: "translate"

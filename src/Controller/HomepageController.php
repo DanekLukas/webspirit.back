@@ -72,7 +72,7 @@ class HomepageController extends AbstractController
   function getCategoriesFiltered (): array {
     return ($cf = $this->categoryRepository->getFilteredCategories()) === null ? [] :
     array_map(function (Category $category): array {
-    return [$category->getId(), $category->getName()];
+    return [$category->getId(), $category->getName(), $category->getNameEn()];
     }, $cf);
   }
 
@@ -105,6 +105,11 @@ class HomepageController extends AbstractController
     $category = urldecode($category);
     $categoriesFiltered = $this->getCategoriesFiltered();
     $texts = $categoriesFiltered === null || !in_array($category, array_map(function($i){return $i[1];},$categoriesFiltered)) ? $this->textRepository->getTexts(null) : $this->textRepository->getFilteredTexts($category);
+    if(is_null($texts)) {
+      header("Location: /archiv");
+      exit;
+
+    }
     $q = bin2hex(random_bytes(64));
     return $this->processTexts($texts, $q, $categoriesFiltered);
   }
@@ -121,6 +126,10 @@ class HomepageController extends AbstractController
       exit;
     }
     $text = $this->textRepository->getText($id);
+    if(is_null($text)) {
+      header('Location: https://'.$_SERVER['SERVER_NAME']);
+      exit;
+    }    
     header('Location: https://'.$_SERVER['SERVER_NAME'].'/archiv/'.$text->getCategory()->getName().'#'.$id);
     exit;
   // $q = bin2hex(random_bytes(64));

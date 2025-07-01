@@ -4,6 +4,11 @@ QueryCommon:
     fields:
       Categories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getCategories')"
       Texts:
         type: "[Text]"
@@ -11,12 +16,21 @@ QueryCommon:
           id:
             description: 'id'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getTexts')"
       Own:
         type: "User"
         resolve: "@service('getOwn')"
       FilteredCategories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredCategories')"
       FilteredTexts:
         type: "[Text]"
@@ -24,4 +38,8 @@ QueryCommon:
           category:
             description: 'category name'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredTexts')"

@@ -18,7 +18,13 @@ Text:
       title:
         type: String
         description: "title"
+      title_en:
+        type: String
+        description: "title"
       text:
+        type: String
+        description: "text"
+      text_en:
         type: String
         description: "text"
       author:

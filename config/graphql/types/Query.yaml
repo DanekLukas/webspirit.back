@@ -4,6 +4,11 @@ Query:
     fields:
       Categories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getCategories')"
       Texts:
         type: "[Text]"
@@ -11,9 +16,18 @@ Query:
           id:
             description: 'id'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getTexts')"
       FilteredCategories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredCategories')"
       FilteredTexts:
         type: "[Text]"
@@ -21,4 +35,8 @@ Query:
           category:
             description: 'category name'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredTexts')"

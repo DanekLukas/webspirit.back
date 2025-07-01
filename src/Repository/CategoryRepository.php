@@ -36,7 +36,7 @@ class CategoryRepository extends ServiceEntityRepository
 
         $categories = [];
 
-        $texts = $this->getEntityManager()->createQuery("select t from App\Entity\Text t where t.delete_date is null order by t.create_date desc")->setFirstResult(20)
+        $texts = $this->getEntityManager()->createQuery("select t from App\Entity\Text t where t.delete_date is null order by t.create_date desc")->setFirstResult(2)
         ->getResult();
 
         foreach($texts as $text) {
@@ -49,7 +49,7 @@ class CategoryRepository extends ServiceEntityRepository
         return count($res) === 0 ? null : $res;
     }
 
-    public function insertCategory(String $name, int $timeZone): Category | null {
+    public function insertCategory(String $name, String $name_en, int $timeZone): Category | null {
         if($this->findOneBy(['name' => $name])) return null;
         $entityManager = $this->getEntityManager();
         $category = new Category();
@@ -57,18 +57,20 @@ class CategoryRepository extends ServiceEntityRepository
         $category->setCreateDate((new \DateTime())->modify("$timeZone hour"));
         $category->setCreatedBy($this->security->getUser());
         $category->setName($name);
+        $category->setNameEn($name_en);
         $entityManager->persist($category);
         $entityManager->flush();
         return $category;
     }
 
-    public function updateCategory(String $id, String $name, int $timeZone): Category | null {
+    public function updateCategory(String $id, String $name, String $name_en, int $timeZone): Category | null {
         $category = $this->find($id);
-        if(!$category || $category->getDeleteDate() !== null || $category->getCreatedBy() !== $this->security->getUser() || $this->findOneBy(['name' => $name])) return null;
+        if(!$category || $category->getDeleteDate() !== null /*|| $category->getCreatedBy() !== $this->security->getUser() || $this->findOneBy(['name' => $name])*/) return null;
         $entityManager = $this->getEntityManager();
         $category->setLastUpdate((new \DateTime())->modify("$timeZone hour"));
         $category->setUpdatedBy($this->security->getUser());
         $category->setName($name);
+        $category->setNameEn($name_en);
         $entityManager->persist($category);
         $entityManager->flush();
         return $category;

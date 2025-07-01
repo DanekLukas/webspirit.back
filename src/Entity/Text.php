@@ -58,6 +58,12 @@ class Text
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $source = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title_en = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $text_en = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -233,6 +239,30 @@ class Text
     public function setSource(?string $source): static
     {
         $this->source = $source;
+
+        return $this;
+    }
+
+    public function getTitleEn(): ?string
+    {
+        return $this->title_en;
+    }
+
+    public function setTitleEn(string $title_en): static
+    {
+        $this->title_en = $title_en;
+
+        return $this;
+    }
+
+    public function getTextEn(): ?string
+    {
+        return $this->text_en;
+    }
+
+    public function setTextEn(string $text_en): static
+    {
+        $this->text_en = $text_en;
 
         return $this;
     }

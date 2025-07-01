@@ -15,9 +15,18 @@ QueryAdmin:
           id:
             description: 'id'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getCategory', [args])"
       Categories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getCategories')"
       Text:
         type: "Text"
@@ -25,6 +34,10 @@ QueryAdmin:
           id:
             description: 'id'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getText', [args])"
       Texts:
         type: "[Text]"
@@ -32,6 +45,10 @@ QueryAdmin:
           id:
             description: 'id'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getTexts')"
       Own:
         type: "User"
@@ -42,6 +59,11 @@ QueryAdmin:
         type: '[String]'
       FilteredCategories:
         type: "[Category]"
+        args:
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredCategories')"
       FilteredTexts:
         type: "[Text]"
@@ -49,6 +71,10 @@ QueryAdmin:
           category:
             description: 'category name'
             type: 'String'
+          lang:
+            description: 'Language code (e.g., en, cs)'
+            type: 'String'
+            defaultValue: 'cs'
         resolve: "@=service('getFilteredTexts')"
       EditTexts:
         type: "[Text]"
